@@ -13,7 +13,7 @@ module.exports = {
       loader: 'esbuild-loader',
       options: {
         loader: 'tsx',
-        target: 'es2015'
+        target: 'es2016'
       }
     }]
   },
