@@ -19,6 +19,19 @@ module.exports = merge(common, {
         'css-loader',
         'postcss-loader'
       ]
+    }, {
+      test: /\.svg$/,
+      exclude: /node_modules/,
+      use: [{
+        loader: '@svgr/webpack',
+        options: {
+          ref: true,
+          icon: true,
+          svgo: true
+        }
+      }, {
+        loader: 'url-loader'
+      }]
     }]
   },
   plugins: [
