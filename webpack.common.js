@@ -1,5 +1,6 @@
 const webpack = require('webpack')
 const dotenv = require('dotenv')
+const { ESBuildPlugin } = require('esbuild-loader')
 
 module.exports = {
   entry: './src/index.tsx',
@@ -9,10 +10,15 @@ module.exports = {
   module: {
     rules: [{
       test: /\.(ts|tsx)$/,
-      loader: 'ts-loader'
+      loader: 'esbuild-loader',
+      options: {
+        loader: 'tsx',
+        target: 'es2015'
+      }
     }]
   },
   plugins: [
+    new ESBuildPlugin(),
     new webpack.DefinePlugin({
       'process.env': JSON.stringify(dotenv.config().parsed)
     })

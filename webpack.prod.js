@@ -4,6 +4,7 @@ const { merge } = require('webpack-merge')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
+const { ESBuildPlugin, ESBuildMinifyPlugin } = require('esbuild-loader')
 
 module.exports = merge(common, {
   mode: 'production',
@@ -40,6 +41,10 @@ module.exports = merge(common, {
   optimization: {
     minimize: true,
     minimizer: [
+      new ESBuildMinifyPlugin({
+        target: 'es2015',
+        minify: true
+      }),
       new CssMinimizerPlugin(),
       new HtmlWebpackPlugin({
         template: './src/index.html',
